@@ -2511,11 +2511,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: c380219be70a44a45a1bbe310dda5d99, type: 2}
-  isGlobal: 1
-  blendDistance: 0
-  weight: 1
-  priority: 0
 --- !u!4 &489930579
 Transform:
   m_ObjectHideFlags: 0
@@ -10795,7 +10790,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7093012899904267556, guid: 829d13317ad37ed448cccf919b6cc747, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.73397934
+      value: 0.059
       objectReference: {fileID: 0}
     - target: {fileID: 7093012899904267556, guid: 829d13317ad37ed448cccf919b6cc747, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10868,6 +10863,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89d90445696b4bb4fb667504ba445825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxControlSpeed: 1
+  maxForwardSpeed: 1
+  horizontalClampLimit: 1.63
+  keyboardSpeed: 12
 --- !u!1001 &7824748206825787110
 PrefabInstance:
   m_ObjectHideFlags: 0
