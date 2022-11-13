@@ -22,12 +22,8 @@ namespace HumanGun.Control
             SetMouseControl();
 #endif
             SetTouchControl();
-        }
-        private void FixedUpdate()
-        {
             AssignMovement(_offsetx * Time.deltaTime * maxControlSpeed);
         }
-
         private void SetTouchControl()
         {
             if (Input.touchCount <= 0) return;
