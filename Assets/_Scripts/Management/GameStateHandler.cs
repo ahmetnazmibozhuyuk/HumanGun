@@ -6,9 +6,8 @@ namespace HumanGun.Managers
         public static GameState CurrentState { get; private set; }
 
         public static event Action OnGameAwaitingStartState;
-        public static event Action OnPoseControlState;
-        public static event Action OnFightState;
-        public static event Action OnFailState;
+        public static event Action OnGameStartedState;
+        public static event Action OnGameLostState;
         public static event Action OnGameWonState;
 
         public static void ChangeState(GameState newState)
@@ -21,14 +20,11 @@ namespace HumanGun.Managers
                 case GameState.GameAwaitingStart:
                     OnGameAwaitingStartState?.Invoke();
                     break;
-                case GameState.PoseControlState:
-                    OnPoseControlState?.Invoke();
+                case GameState.GameStarted:
+                    OnGameStartedState?.Invoke();
                     break;
-                case GameState.FightState:
-                    OnFightState?.Invoke();
-                    break;
-                case GameState.FailState:
-                    OnFailState?.Invoke();
+                case GameState.GameLost:
+                    OnGameLostState?.Invoke();
                     break;
                 case GameState.GameWon:
                     OnGameWonState?.Invoke();
@@ -42,10 +38,9 @@ namespace HumanGun.Managers
     {
         GamePreStart = 0,
         GameAwaitingStart = 1,
-        PoseControlState = 2,
-        FightState = 3,
-        FailState = 4,
-        GameWon = 5,
+        GameStarted = 2,
+        GameLost = 3,
+        GameWon = 4,
     }
 }
 namespace HumanGun.Managers
