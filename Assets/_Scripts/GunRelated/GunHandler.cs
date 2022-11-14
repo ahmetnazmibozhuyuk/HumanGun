@@ -27,10 +27,21 @@ namespace HumanGun.GunRelated
 
         [SerializeField] private StickMenInfo[] stickMenInfo;
 
+        private Action ShootAction;
+        private float _shootInterval = 1;
+
         private void Awake()
         {
             _animator = GetComponent<Animator>();
             //InvokeRepeating("PistolShoot", 1,0.5f);
+            StartCoroutine(Co_Shoot());
+        }
+        private IEnumerator Co_Shoot()
+        {
+            yield return new WaitForSeconds(_shootInterval);
+            ShootAction?.Invoke();
+            Debug.Log("invoke shoot"+_currentGunMode);
+            StartCoroutine(Co_Shoot());
         }
         private void OnEnable()
         {
@@ -46,7 +57,6 @@ namespace HumanGun.GunRelated
         }
         private void Update()
         {
-            
             Shoot();
         }
         private void OnTriggerEnter(Collider other)
@@ -97,6 +107,7 @@ namespace HumanGun.GunRelated
             if(_stickManList.Count <= 0)
             {
                 _animator.SetTrigger("IsRunning");
+                ShootAction = null;
                 return;
             }
             if (_stickManList.Count >= _shotgunSwitchAmount)
@@ -134,15 +145,15 @@ namespace HumanGun.GunRelated
         }
         private void PistolConfiguration()
         {
-            
+            _currentGunMode = GunMode.Pistol;
         }
         private void RifleConfiguration()
         {
-
+            _currentGunMode = GunMode.Rifle;
         }
         private void ShotgunConfiguration()
         {
-
+            _currentGunMode = GunMode.Shotgun;
         }
         #endregion
 
@@ -154,13 +165,13 @@ namespace HumanGun.GunRelated
             switch (_currentGunMode)
             {
                 case GunMode.Pistol:
-                    PistolShoot();
+                    ShootAction = PistolShoot;
                     break;
                 case GunMode.Rifle:
-                    RifleShoot();
+                    ShootAction = RifleShoot;
                     break;
                 case GunMode.Shotgun:
-                    ShotgunShoot();
+                    ShootAction = ShotgunShoot;
                     break;
             }
         }
