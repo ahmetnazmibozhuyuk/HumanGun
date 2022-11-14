@@ -1,3 +1,4 @@
+using HumanGun.Managers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,9 @@ namespace HumanGun.Control
             SetMouseControl();
 #endif
             SetTouchControl();
+
+            if (GameStateHandler.CurrentState != GameState.GameStarted) return;
+
             AssignMovement(_offsetx * Time.deltaTime * maxControlSpeed);
         }
         private void SetTouchControl()
@@ -32,6 +36,7 @@ namespace HumanGun.Control
 
             if (touch.phase == TouchPhase.Began)
             {
+                FirstTouch();
                 _hitDownPositionx = touch.position.x;
             }
             else if (touch.phase == TouchPhase.Moved)
@@ -49,6 +54,7 @@ namespace HumanGun.Control
         {
             if (Input.GetMouseButtonDown(0))
             {
+                FirstTouch();
                 _hitDownPositionx = Input.mousePosition.x;
             }
             else if (Input.GetMouseButton(0))
@@ -61,9 +67,9 @@ namespace HumanGun.Control
                 _offsetx = 0;
             }
         }
+
 #endif
-
-
+        
         private void AssignMovement(float xDisplacement)
         {
             transform.position = (new Vector3(
@@ -71,6 +77,12 @@ namespace HumanGun.Control
                 transform.position.y,
                 transform.position.z + maxForwardSpeed*Time.deltaTime));
         }
-
+        private void FirstTouch()
+        {
+            if(GameStateHandler.CurrentState == GameState.GameAwaitingStart)
+            {
+                GameStateHandler.ChangeState(GameState.GameStarted);
+            }
+        }
     }
 }

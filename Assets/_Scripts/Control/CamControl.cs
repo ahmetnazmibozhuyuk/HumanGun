@@ -18,6 +18,5 @@ namespace HumanGun.Control
         {
             transform.position =  Vector3.Lerp(transform.position, GameManager.Instance.PlayerObject.transform.position, Time.deltaTime * cameraPositionDelay);
         }
-
     }
 }
