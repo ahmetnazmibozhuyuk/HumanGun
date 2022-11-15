@@ -7,41 +7,52 @@ using HumanGun.Interactable;
 
 namespace HumanGun.GunRelated
 {
-    [RequireComponent(typeof(Animator))]
     public class GunHandler : MonoBehaviour
     {
         public static string[] PoseNames = { "Pose0", "Pose1", "Pose2", "Pose3" };
         [SerializeField] private GameObject bulletProjectile;
 
-        private Animator _animator;
+        [SerializeField] private Animator animator;
 
         private GunMode _currentGunMode;
 
-        private int _attachedStickManAmount;
+        [SerializeField]private WeaponInfo pistolInfo;
+        [SerializeField]private WeaponInfo rifleInfo;
+        [SerializeField]private WeaponInfo shotgunInfo;
 
-        private readonly int _pistolSwitchAmount = 1;
-        private readonly int _rifleSwitchAmount = 10;
-        private readonly int _shotgunSwitchAmount = 20;
+        [SerializeField] private float shotgunScatterAmount = 2f;
+
+        private WeaponInfo _currentWeaponInfo;
+
+        private float _shootInterval = 1;
 
         private List<IStickAdded> _stickManList = new List<IStickAdded>();
 
-        [SerializeField] private StickMenInfo[] stickMenInfo;
+        private StickMenConfiguration[] _currentStickMenConfiguration;
+
+        [SerializeField] private StickMenConfiguration[] pistolStickMenConfiguration;
+        [SerializeField] private StickMenConfiguration[] rifleStickMenConfiguration;
+        [SerializeField] private StickMenConfiguration[] shotgunStickMenConfiguration;
 
         private Action ShootAction;
-        private float _shootInterval = 1;
+
+        private float _passedTime;
+        private RaycastHit hit;
 
         private void Awake()
         {
-            _animator = GetComponent<Animator>();
-            //InvokeRepeating("PistolShoot", 1,0.5f);
-            StartCoroutine(Co_Shoot());
+            animator = GetComponent<Animator>();
         }
-        private IEnumerator Co_Shoot()
+        private void ShootLoop()
         {
-            yield return new WaitForSeconds(_shootInterval);
-            ShootAction?.Invoke();
-            Debug.Log("invoke shoot"+_currentGunMode);
-            StartCoroutine(Co_Shoot());
+
+            _passedTime += Time.deltaTime;
+            if(_passedTime > _shootInterval)
+            {
+                _passedTime = 0;
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _currentWeaponInfo.ShootRange))
+                    ShootAction?.Invoke();
+            }
         }
         private void OnEnable()
         {
@@ -53,11 +64,14 @@ namespace HumanGun.GunRelated
         }
         private void SetInitialPose()
         {
-            _animator.SetTrigger("IsRunning");
+            animator.SetTrigger("IsRunning");
         }
         private void Update()
         {
-            Shoot();
+            if(GameStateHandler.CurrentState != GameState.GameStarted) return;
+
+            AssignShootAction();
+            ShootLoop();
         }
         private void OnTriggerEnter(Collider other)
         {
@@ -69,60 +83,69 @@ namespace HumanGun.GunRelated
             if (other.gameObject.GetComponent<IStickAdded>() == null) return;
             IStickAdded stickMan = other.gameObject.GetComponent<IStickAdded>();
             _stickManList.Add(stickMan);
+            CheckIfShouldSwitch();
             Debug.Log("added stickman, new count ="+_stickManList.Count);
             stickMan.AddStickMan(transform);
-            stickMan.RepositionStickMan(stickMenInfo[_stickManList.Count].PoseIndex, stickMenInfo[_stickManList.Count].LocalTransform);
-            CheckIfShouldSwitch();
-            _animator.SetTrigger(PoseNames[0]);
+            stickMan.RepositionStickMan(_currentStickMenConfiguration[_stickManList.Count].PoseIndex, _currentStickMenConfiguration[_stickManList.Count].LocalTransform);
+            animator.SetTrigger(PoseNames[0]);
         }
         private void HitObstacle(Collider other)
         {
             if (other.gameObject.GetComponent<IObstacleInteraction>() == null) return;
-            RemoveStickMan(1);
+            IObstacleInteraction interactedObstacle = other.gameObject.GetComponent<IObstacleInteraction>();
+            RemoveStickMan(interactedObstacle.CurrentLives);
+            interactedObstacle.HitObstacle(_stickManList.Count);
         }
 
         public void RemoveStickMan(int stickManAmount)
         {
-            if (_stickManList.Count > 0)
+            for(int i = 0; i < stickManAmount; i++)
             {
-                _stickManList[_stickManList.Count - 1].RemoveStickMan();
-                _stickManList.RemoveAt(_stickManList.Count - 1);
-                Debug.Log("added stickman, new count =" + _stickManList.Count);
-                CheckIfShouldSwitch();
-                return;
+                if (_stickManList.Count > 0)
+                {
+                    _stickManList[_stickManList.Count - 1].RemoveStickMan();
+                    _stickManList.RemoveAt(_stickManList.Count - 1);
+                    Debug.Log("added stickman, new count =" + _stickManList.Count);
+                    CheckIfShouldSwitch();
+                    continue;
+                }
+                GameLost();
+                break;
             }
-            GameLost();
+
 
         }
         private void GameLost()
         {
-            _animator.SetTrigger("IsDead");
+            animator.SetTrigger("IsDead");
             GameStateHandler.ChangeState(GameState.GameLost);
         }
-
 
         #region Gun Mode Switch and Configuration
         private void CheckIfShouldSwitch()
         {
             if(_stickManList.Count <= 0)
             {
-                _animator.SetTrigger("IsRunning");
+                animator.SetTrigger("IsRunning");
                 ShootAction = null;
                 return;
             }
-            if (_stickManList.Count >= _shotgunSwitchAmount)
+            if (_stickManList.Count >= shotgunInfo.SwitchAmount)
             {
                 SwitchGunMode(GunMode.Shotgun);
+                Debug.Log("shotgun mode");
                 return;
             }
-            if (_stickManList.Count >= _rifleSwitchAmount)
+            if (_stickManList.Count >= rifleInfo.SwitchAmount)
             {
                 SwitchGunMode(GunMode.Rifle);
+                Debug.Log("rifle mode");
                 return;
             }
-            if (_stickManList.Count >= _pistolSwitchAmount)
+            if (_stickManList.Count >= pistolInfo.SwitchAmount)
             {
                 SwitchGunMode(GunMode.Pistol);
+                Debug.Log("pistol mode");
                 return;
             }
         }
@@ -146,19 +169,25 @@ namespace HumanGun.GunRelated
         private void PistolConfiguration()
         {
             _currentGunMode = GunMode.Pistol;
+            _currentWeaponInfo = pistolInfo;
+            _currentStickMenConfiguration = pistolStickMenConfiguration;
         }
         private void RifleConfiguration()
         {
             _currentGunMode = GunMode.Rifle;
+            _currentWeaponInfo = rifleInfo;
+            _currentStickMenConfiguration = rifleStickMenConfiguration;
         }
         private void ShotgunConfiguration()
         {
             _currentGunMode = GunMode.Shotgun;
+            _currentWeaponInfo = shotgunInfo;
+            _currentStickMenConfiguration = shotgunStickMenConfiguration;
         }
         #endregion
 
         #region Shoot Methods
-        private void Shoot()
+        private void AssignShootAction()
         {
             if (_currentGunMode == GunMode.Idle) return;
 
@@ -178,15 +207,26 @@ namespace HumanGun.GunRelated
         private void PistolShoot()
         {
             GameObject spawnedBullet = Instantiate(bulletProjectile, transform.position + Vector3.up * 0.5f, Quaternion.identity);
-            spawnedBullet.GetComponent<BulletProjectile>().ShootBullet(new Vector3(0, 0, 20));
+            spawnedBullet.GetComponent<BulletProjectile>().ShootBullet(new Vector3(0, 0, 20),1);
         }
 
         private void RifleShoot()
         {
             
+            GameObject spawnedBullet = Instantiate(bulletProjectile, transform.position + Vector3.up * 0.5f, Quaternion.identity);
+            spawnedBullet.GetComponent<BulletProjectile>().ShootBullet(new Vector3(0, 0, rifleInfo.BulletSpeed),rifleInfo.BulletDamage);
         }
         private void ShotgunShoot()
         {
+            for(int i = 0; i < UnityEngine.Random.Range(3,6); i++)
+            {
+                GameObject spawnedBullet = Instantiate(bulletProjectile, transform.position + Vector3.up * 0.5f, Quaternion.identity);
+                spawnedBullet.GetComponent<BulletProjectile>().ShootBullet(new Vector3
+                    (UnityEngine.Random.Range(-shotgunScatterAmount, shotgunScatterAmount), 
+                    UnityEngine.Random.Range(-shotgunScatterAmount, shotgunScatterAmount), 
+                    shotgunInfo.BulletSpeed),
+                    shotgunInfo.BulletDamage);
+            }
 
         }
         #endregion
@@ -195,13 +235,22 @@ namespace HumanGun.GunRelated
     public interface IStickAdded
     {
         public void AddStickMan(Transform gunTransform);
-        public void RepositionStickMan(int poseIndex, Transform newLocalPosition);
+        public void RepositionStickMan(int poseIndex, Transform newLocalTransform);
         public void RemoveStickMan();
     }
     [Serializable]
-    public struct StickMenInfo
+    public struct StickMenConfiguration
     {
         public Transform LocalTransform;
         public int PoseIndex;
+    }
+    [Serializable]
+    public struct WeaponInfo
+    {
+        public int SwitchAmount;
+        public float ShootInterval;
+        public float ShootRange;
+        public float BulletSpeed;
+        public int BulletDamage;
     }
 }

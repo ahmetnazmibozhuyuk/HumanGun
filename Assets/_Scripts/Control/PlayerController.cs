@@ -73,7 +73,7 @@ namespace HumanGun.Control
         private void AssignMovement(float xDisplacement)
         {
             transform.position = (new Vector3(
-                Mathf.Clamp(transform.position.x + xDisplacement, -horizontalClampLimit, horizontalClampLimit),
+                Mathf.Clamp(transform.position.x + (250*xDisplacement)/Screen.width, -horizontalClampLimit, horizontalClampLimit),
                 transform.position.y,
                 transform.position.z + maxForwardSpeed*Time.deltaTime));
         }

@@ -19,9 +19,10 @@ namespace HumanGun.GunRelated
         {
             Invoke(nameof(DespawnWithTime),0.2f);
         }
-        public void ShootBullet(Vector3 startVelocity)
+        public void ShootBullet(Vector3 startVelocity, int hitAmount)
         {
             _rigidbody.velocity = startVelocity;
+            _hitAmount = hitAmount;
         }
         private void OnTriggerEnter(Collider other)
         {
