@@ -11,6 +11,7 @@ namespace HumanGun.GunRelated
     {
         public static string[] PoseNames = { "Pose0", "Pose1", "Pose2", "Pose3" };
         [SerializeField] private GameObject bulletProjectile;
+        [SerializeField] private GameObject explosiveProjectile;
 
         [SerializeField] private Animator animator;
 
@@ -19,12 +20,13 @@ namespace HumanGun.GunRelated
         [SerializeField]private WeaponInfo pistolInfo;
         [SerializeField]private WeaponInfo rifleInfo;
         [SerializeField]private WeaponInfo shotgunInfo;
+        [SerializeField]private WeaponInfo grenadeLauncherInfo;
 
         [SerializeField] private float shotgunScatterAmount = 2f;
 
         private WeaponInfo _currentWeaponInfo;
 
-        private float _shootInterval = 1;
+        //private float _shootInterval = 1;
 
         private List<IStickAdded> _stickManList = new List<IStickAdded>();
 
@@ -33,6 +35,7 @@ namespace HumanGun.GunRelated
         [SerializeField] private StickMenConfiguration[] pistolStickMenConfiguration;
         [SerializeField] private StickMenConfiguration[] rifleStickMenConfiguration;
         [SerializeField] private StickMenConfiguration[] shotgunStickMenConfiguration;
+        [SerializeField] private StickMenConfiguration[] grenadeLauncherStickMenConfiguration;
 
         private Action ShootAction;
 
@@ -43,7 +46,7 @@ namespace HumanGun.GunRelated
         {
 
             _passedTime += Time.deltaTime;
-            if(_passedTime > _shootInterval)
+            if(_passedTime > _currentWeaponInfo.ShootInterval)
             {
                 _passedTime = 0;
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _currentWeaponInfo.ShootRange))
@@ -77,11 +80,18 @@ namespace HumanGun.GunRelated
         }
         private void AddStickMan(Collider other)
         {
+
+            if (_stickManList.Count > 28)
+            {
+                Destroy(other.gameObject);
+                GameManager.Instance.AddMoney(10);
+                return;
+            }
+
             if (!other.gameObject.TryGetComponent<IStickAdded>(out var stickMan)) return;
             
             _stickManList.Add(stickMan);
             CheckIfShouldSwitch();
-            Debug.Log("added stickman, new count ="+_stickManList.Count);
             stickMan.AddStickMan(transform);
             stickMan.RepositionStickMan(_currentStickMenConfiguration[_stickManList.Count].PoseIndex, _currentStickMenConfiguration[_stickManList.Count].LocalTransform);
             animator.SetTrigger(PoseNames[0]);
@@ -108,15 +118,12 @@ namespace HumanGun.GunRelated
                 {
                     _stickManList[_stickManList.Count - 1].RemoveStickMan();
                     _stickManList.RemoveAt(_stickManList.Count - 1);
-                    Debug.Log("added stickman, new count =" + _stickManList.Count);
                     CheckIfShouldSwitch();
                     continue;
                 }
                 GameLost();
                 break;
             }
-
-
         }
         private void GameLost()
         {
@@ -133,22 +140,24 @@ namespace HumanGun.GunRelated
                 ShootAction = null;
                 return;
             }
+            if (_stickManList.Count >= grenadeLauncherInfo.SwitchAmount)
+            {
+                SwitchGunMode(GunMode.GrenadeLaucher);
+                return;
+            }
             if (_stickManList.Count >= shotgunInfo.SwitchAmount)
             {
                 SwitchGunMode(GunMode.Shotgun);
-                Debug.Log("shotgun mode");
                 return;
             }
             if (_stickManList.Count >= rifleInfo.SwitchAmount)
             {
                 SwitchGunMode(GunMode.Rifle);
-                Debug.Log("rifle mode");
                 return;
             }
             if (_stickManList.Count >= pistolInfo.SwitchAmount)
             {
                 SwitchGunMode(GunMode.Pistol);
-                Debug.Log("pistol mode");
                 return;
             }
         }
@@ -166,6 +175,9 @@ namespace HumanGun.GunRelated
                     break;
                 case GunMode.Shotgun:
                     ShotgunConfiguration();
+                    break;
+                case GunMode.GrenadeLaucher:
+                    GrenadeLauncherConfiguration();
                     break;
             }
         }
@@ -199,6 +211,16 @@ namespace HumanGun.GunRelated
                 _stickManList[i].RepositionStickMan(_currentStickMenConfiguration[i].PoseIndex, _currentStickMenConfiguration[i].LocalTransform);
             }
         }
+        private void GrenadeLauncherConfiguration()
+        {
+            _currentGunMode = GunMode.GrenadeLaucher;
+            _currentWeaponInfo = grenadeLauncherInfo;
+            _currentStickMenConfiguration = grenadeLauncherStickMenConfiguration;
+            for (int i = 0; i < _stickManList.Count; i++)
+            {
+                _stickManList[i].RepositionStickMan(_currentStickMenConfiguration[i].PoseIndex, _currentStickMenConfiguration[i].LocalTransform);
+            }
+        }
         #endregion
 
         #region Shoot Methods
@@ -216,6 +238,9 @@ namespace HumanGun.GunRelated
                     break;
                 case GunMode.Shotgun:
                     ShootAction = ShotgunShoot;
+                    break;
+                case GunMode.GrenadeLaucher:
+                    ShootAction = GrenadeLauncherShoot;
                     break;
             }
         }
@@ -244,9 +269,15 @@ namespace HumanGun.GunRelated
             }
 
         }
+        private void GrenadeLauncherShoot()
+        {
+
+            GameObject spawnedBullet = Instantiate(explosiveProjectile, transform.position + Vector3.up * 0.5f, Quaternion.identity);
+            spawnedBullet.GetComponent<BulletProjectile>().ShootBullet(new Vector3(0, 3, grenadeLauncherInfo.BulletSpeed), grenadeLauncherInfo.BulletDamage);
+        }
         #endregion
     }
-    public enum GunMode { Idle = 0, Pistol = 1, Rifle = 2, Shotgun = 3 }
+    public enum GunMode { Idle = 0, Pistol = 1, Rifle = 2, Shotgun = 3, GrenadeLaucher = 4 }
     public interface IStickAdded
     {
         public void AddStickMan(Transform gunTransform);
