@@ -776,6 +776,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 51265458}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &57087074
 GameObject:
   m_ObjectHideFlags: 0
@@ -1840,6 +1841,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 159747230}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &161851050
 GameObject:
   m_ObjectHideFlags: 0
@@ -2596,6 +2598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 179739344}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &181045898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3058,6 +3061,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 181045901}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &181640472
 GameObject:
   m_ObjectHideFlags: 0
@@ -3552,6 +3556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 187234300}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &193441568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4380,6 +4385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 219619999}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &228803050
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4998,6 +5004,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 2
   animator: {fileID: 239980167}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &245070457
 GameObject:
   m_ObjectHideFlags: 0
@@ -5523,6 +5530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 1
   animator: {fileID: 267467954}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &272495835
 GameObject:
   m_ObjectHideFlags: 0
@@ -6403,6 +6411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 315581426}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &323417404
 GameObject:
   m_ObjectHideFlags: 0
@@ -7012,6 +7021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 336588077}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &339274369
 GameObject:
   m_ObjectHideFlags: 0
@@ -7631,6 +7641,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 356100022}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &362876270
 GameObject:
   m_ObjectHideFlags: 0
@@ -8191,6 +8202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 375005950}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &376585912
 GameObject:
   m_ObjectHideFlags: 0
@@ -8921,6 +8933,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 399925015}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &400665643
 GameObject:
   m_ObjectHideFlags: 0
@@ -9671,6 +9684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 462621693}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &463943504
 GameObject:
   m_ObjectHideFlags: 0
@@ -10261,6 +10275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 3
   animator: {fileID: 482429569}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &483035860
 GameObject:
   m_ObjectHideFlags: 0
@@ -10912,6 +10927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 2
   animator: {fileID: 505751022}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &508438439
 GameObject:
   m_ObjectHideFlags: 0
@@ -11410,6 +11426,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 513507637}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &524745244
 GameObject:
   m_ObjectHideFlags: 0
@@ -12304,6 +12321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 605180172}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &606690776
 GameObject:
   m_ObjectHideFlags: 0
@@ -12936,6 +12954,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 2
   animator: {fileID: 629136789}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &629161320
 GameObject:
   m_ObjectHideFlags: 0
@@ -13623,6 +13642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 672986743}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &677997964
 GameObject:
   m_ObjectHideFlags: 0
@@ -14117,6 +14137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 695650647}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &704686247
 GameObject:
   m_ObjectHideFlags: 0
@@ -14241,7 +14262,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 45.867, y: -72.023, z: -2.094}
 --- !u!1 &711511984
 GameObject:
@@ -14868,6 +14889,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 763675406}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &772058636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15330,6 +15352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 772058639}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &773763397
 GameObject:
   m_ObjectHideFlags: 0
@@ -16403,6 +16426,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 868258392}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &872888905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16991,6 +17015,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 2
   animator: {fileID: 881923633}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &893876563
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17453,6 +17478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 893876566}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &896231231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18714,6 +18740,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 970825628}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &973220722
 GameObject:
   m_ObjectHideFlags: 0
@@ -19405,6 +19432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1004592537}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1010781250
 GameObject:
   m_ObjectHideFlags: 0
@@ -19994,6 +20022,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1026706022}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1032213089
 GameObject:
   m_ObjectHideFlags: 0
@@ -20520,6 +20549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1040153777}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1050622173
 GameObject:
   m_ObjectHideFlags: 0
@@ -20661,7 +20691,7 @@ Transform:
   m_Children:
   - {fileID: 963194228}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1105212591
 GameObject:
@@ -21242,6 +21272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 2
   animator: {fileID: 1113160369}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &1118181256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21704,6 +21735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 2
   animator: {fileID: 1118181259}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1122906433
 GameObject:
   m_ObjectHideFlags: 0
@@ -22230,6 +22262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1136662345}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1139406192
 GameObject:
   m_ObjectHideFlags: 0
@@ -23012,6 +23045,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 1
   animator: {fileID: 1203597371}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1212279073 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6542593930966922007, guid: c09d42b45da63ec45988b00741773610, type: 3}
@@ -23543,6 +23577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1224827744}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1237902528
 GameObject:
   m_ObjectHideFlags: 0
@@ -24037,6 +24072,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1244866254}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &1250476942
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24383,63 +24419,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3826632414497942333, guid: c96393a9719df5541a15528d755c87fd, type: 3}
   m_PrefabInstance: {fileID: 1269854638}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1271598346
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3495290998933180865, guid: a08cfa1b208b3364ea2cabf3c93b0e85, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3495290998933180865, guid: a08cfa1b208b3364ea2cabf3c93b0e85, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.12811184
-      objectReference: {fileID: 0}
-    - target: {fileID: 3495290998933180865, guid: a08cfa1b208b3364ea2cabf3c93b0e85, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.476
-      objectReference: {fileID: 0}
-    - target: {fileID: 3495290998933180865, guid: a08cfa1b208b3364ea2cabf3c93b0e85, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -20.224
-      objectReference: {fileID: 0}
-    - target: {fileID: 3495290998933180865, guid: a08cfa1b208b3364ea2cabf3c93b0e85, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3495290998933180865, guid: a08cfa1b208b3364ea2cabf3c93b0e85, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3495290998933180865, guid: a08cfa1b208b3364ea2cabf3c93b0e85, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3495290998933180865, guid: a08cfa1b208b3364ea2cabf3c93b0e85, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3495290998933180865, guid: a08cfa1b208b3364ea2cabf3c93b0e85, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3495290998933180865, guid: a08cfa1b208b3364ea2cabf3c93b0e85, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3495290998933180865, guid: a08cfa1b208b3364ea2cabf3c93b0e85, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3495290998933180879, guid: a08cfa1b208b3364ea2cabf3c93b0e85, type: 3}
-      propertyPath: m_Name
-      value: ExplosiveProjectile
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a08cfa1b208b3364ea2cabf3c93b0e85, type: 3}
 --- !u!1 &1271760282
 GameObject:
   m_ObjectHideFlags: 0
@@ -25472,6 +25451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 2
   animator: {fileID: 1346340936}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1356311474
 GameObject:
   m_ObjectHideFlags: 0
@@ -25583,7 +25563,7 @@ GameObject:
   - component: {fileID: 1364953544}
   m_Layer: 0
   m_Name: Gun
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25714,19 +25694,19 @@ MonoBehaviour:
     PoseIndex: 0
   shotgunStickMenConfiguration:
   - LocalTransform: {fileID: 239980165}
-    PoseIndex: 0
+    PoseIndex: 2
   - LocalTransform: {fileID: 356100020}
     PoseIndex: 0
   - LocalTransform: {fileID: 1976924304}
-    PoseIndex: 0
+    PoseIndex: 1
   - LocalTransform: {fileID: 1203597369}
-    PoseIndex: 0
+    PoseIndex: 1
   - LocalTransform: {fileID: 772058637}
     PoseIndex: 0
   - LocalTransform: {fileID: 1420203340}
-    PoseIndex: 0
+    PoseIndex: 3
   - LocalTransform: {fileID: 1653217803}
-    PoseIndex: 0
+    PoseIndex: 3
   - LocalTransform: {fileID: 315581424}
     PoseIndex: 0
   - LocalTransform: {fileID: 2006034731}
@@ -25755,13 +25735,13 @@ MonoBehaviour:
     PoseIndex: 0
   grenadeLauncherStickMenConfiguration:
   - LocalTransform: {fileID: 1545326223}
-    PoseIndex: 0
+    PoseIndex: 2
   - LocalTransform: {fileID: 1730008875}
-    PoseIndex: 0
+    PoseIndex: 2
   - LocalTransform: {fileID: 1113160367}
-    PoseIndex: 0
+    PoseIndex: 2
   - LocalTransform: {fileID: 1838629934}
-    PoseIndex: 0
+    PoseIndex: 2
   - LocalTransform: {fileID: 181045899}
     PoseIndex: 0
   - LocalTransform: {fileID: 159747228}
@@ -25777,9 +25757,9 @@ MonoBehaviour:
   - LocalTransform: {fileID: 672986741}
     PoseIndex: 0
   - LocalTransform: {fileID: 1858141455}
-    PoseIndex: 0
+    PoseIndex: 3
   - LocalTransform: {fileID: 482429567}
-    PoseIndex: 0
+    PoseIndex: 3
   - LocalTransform: {fileID: 399925013}
     PoseIndex: 0
   - LocalTransform: {fileID: 1040153775}
@@ -25797,13 +25777,13 @@ MonoBehaviour:
   - LocalTransform: {fileID: 1840512890}
     PoseIndex: 0
   - LocalTransform: {fileID: 267467952}
-    PoseIndex: 0
+    PoseIndex: 1
   - LocalTransform: {fileID: 1694297000}
-    PoseIndex: 0
+    PoseIndex: 1
   - LocalTransform: {fileID: 505751020}
-    PoseIndex: 0
+    PoseIndex: 2
   - LocalTransform: {fileID: 1471591115}
-    PoseIndex: 0
+    PoseIndex: 2
   - LocalTransform: {fileID: 336588075}
     PoseIndex: 0
   - LocalTransform: {fileID: 1481924327}
@@ -25811,6 +25791,10 @@ MonoBehaviour:
   - LocalTransform: {fileID: 1608701697}
     PoseIndex: 0
   - LocalTransform: {fileID: 1136662343}
+    PoseIndex: 0
+  - LocalTransform: {fileID: 187234298}
+    PoseIndex: 0
+  - LocalTransform: {fileID: 187234298}
     PoseIndex: 0
   - LocalTransform: {fileID: 187234298}
     PoseIndex: 0
@@ -25852,7 +25836,7 @@ Transform:
   - {fileID: 329953584}
   - {fileID: 387304977}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1380141318
 GameObject:
@@ -26348,6 +26332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1384421565}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1385245258
 GameObject:
   m_ObjectHideFlags: 0
@@ -27033,6 +27018,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 3
   animator: {fileID: 1420203342}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1421776057
 GameObject:
   m_ObjectHideFlags: 0
@@ -27621,6 +27607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1433453584}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1434223641
 GameObject:
   m_ObjectHideFlags: 0
@@ -28311,6 +28298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 2
   animator: {fileID: 1471591117}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1471665304
 GameObject:
   m_ObjectHideFlags: 0
@@ -28868,6 +28856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1481924329}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &1483216624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29551,6 +29540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1504509055}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1508296853
 GameObject:
   m_ObjectHideFlags: 0
@@ -30076,6 +30066,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1519289692}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &1520021312
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30663,6 +30654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 2
   animator: {fileID: 1545326225}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1559419199
 GameObject:
   m_ObjectHideFlags: 0
@@ -31515,6 +31507,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1597945765}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &1608701696
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31977,6 +31970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1608701699}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1609661512
 GameObject:
   m_ObjectHideFlags: 0
@@ -32724,6 +32718,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 3
   animator: {fileID: 1653217805}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &1684956722
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33280,6 +33275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 1
   animator: {fileID: 1694297002}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1697097659
 GameObject:
   m_ObjectHideFlags: 0
@@ -33774,6 +33770,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1697246456}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1705867298
 GameObject:
   m_ObjectHideFlags: 0
@@ -34517,6 +34514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1724047093}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &1728386347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35091,6 +35089,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 2
   animator: {fileID: 1730008877}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &1731828176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35553,6 +35552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1731828179}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1732137702
 GameObject:
   m_ObjectHideFlags: 0
@@ -35741,7 +35741,7 @@ Transform:
   - {fileID: 599723403}
   - {fileID: 1262066524}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1757523800
 PrefabInstance:
@@ -36205,6 +36205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1757523803}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1763277359
 GameObject:
   m_ObjectHideFlags: 0
@@ -36704,6 +36705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1767860169}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1771355403
 GameObject:
   m_ObjectHideFlags: 0
@@ -37291,6 +37293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1801886797}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1814135490
 GameObject:
   m_ObjectHideFlags: 0
@@ -37878,6 +37881,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 2
   animator: {fileID: 1838629936}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &1840512889
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38340,6 +38344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1840512892}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &1841298713
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38926,6 +38931,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1846847133}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1849312428
 GameObject:
   m_ObjectHideFlags: 0
@@ -39589,6 +39595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1857815206}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &1858141454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40051,6 +40058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 3
   animator: {fileID: 1858141457}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &1863316891
 GameObject:
   m_ObjectHideFlags: 0
@@ -41022,6 +41030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 1918020878}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &1919865699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41554,6 +41563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 3
   animator: {fileID: 1923822120}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &1939432953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42272,6 +42282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 1
   animator: {fileID: 1976924306}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &1979230664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43091,6 +43102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 2006034733}
+  dummyRenderer: {fileID: 0}
 --- !u!1 &2015116798
 GameObject:
   m_ObjectHideFlags: 0
@@ -44147,6 +44159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 0
   animator: {fileID: 2119782957}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &2134749248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45923,7 +45936,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8834081763874611668, guid: 09e31a02a163f07459322c4cfdffe940, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8834081763874611668, guid: 09e31a02a163f07459322c4cfdffe940, type: 3}
       propertyPath: m_LocalPosition.x
@@ -46487,6 +46500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndex: 2
   animator: {fileID: 8911970489567697547}
+  dummyRenderer: {fileID: 0}
 --- !u!1001 &9116076895852955782
 PrefabInstance:
   m_ObjectHideFlags: 0

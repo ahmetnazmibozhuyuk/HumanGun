@@ -6,6 +6,8 @@ namespace HumanGun.Tools
     {
         [SerializeField] private int poseIndex;
         [SerializeField] private Animator animator;
+
+        [SerializeField] private Renderer dummyRenderer;
         private void Awake()
         {
             Destroy(this);

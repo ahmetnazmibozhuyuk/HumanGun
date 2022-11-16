@@ -14,6 +14,7 @@ namespace HumanGun.GunRelated
         [SerializeField] private GameObject explosiveProjectile;
 
         [SerializeField] private Animator animator;
+        private BoxCollider _collider;
 
         private GunMode _currentGunMode;
 
@@ -25,8 +26,6 @@ namespace HumanGun.GunRelated
         [SerializeField] private float shotgunScatterAmount = 2f;
 
         private WeaponInfo _currentWeaponInfo;
-
-        //private float _shootInterval = 1;
 
         private List<IStickAdded> _stickManList = new List<IStickAdded>();
 
@@ -42,16 +41,26 @@ namespace HumanGun.GunRelated
         private float _passedTime;
         private RaycastHit hit;
 
-        private void ShootLoop()
-        {
+        #region Collider Properties
+        private readonly Vector3 defaultColliderCenter = new Vector3(0, 0.25f, 0);
+        private readonly Vector3 pistolColliderCenter = new Vector3(0, 0.25f, 0.25f);
+        private readonly Vector3 rifleColliderCenter = new Vector3(0, 0.25f, 0.5f);
+        private readonly Vector3 shotgunColliderCenter = new Vector3(0, 0.25f, 0.5f);
+        private readonly Vector3 grenadeLauncherColliderCenter = new Vector3(0, 0.25f, 0.4f);
 
-            _passedTime += Time.deltaTime;
-            if(_passedTime > _currentWeaponInfo.ShootInterval)
-            {
-                _passedTime = 0;
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _currentWeaponInfo.ShootRange))
-                    ShootAction?.Invoke();
-            }
+        private readonly Vector3 defaultColliderSize = new Vector3(0.5f, 1, 0.5f);
+        private readonly Vector3 pistolColliderSize = new Vector3(0.5f, 1, 0.7f);
+        private readonly Vector3 rifleColliderSize = new Vector3(0.5f, 1, 0.9f);
+        private readonly Vector3 shotgunColliderSize = new Vector3(0.6f, 1, 0.9f);
+        private readonly Vector3 grenadeLauncherColliderSize = new Vector3(0.6f, 1, 0.9f);
+        #endregion
+        private void Awake()
+        {
+            _collider = GetComponent<BoxCollider>();
+        }
+        private void Start()
+        {
+            AssignColliderPorperites(defaultColliderCenter, defaultColliderSize);
         }
         private void OnEnable()
         {
@@ -72,6 +81,18 @@ namespace HumanGun.GunRelated
             AssignShootAction();
             ShootLoop();
         }
+
+        private void ShootLoop()
+        {
+            _passedTime += Time.deltaTime;
+            if (_passedTime > _currentWeaponInfo.ShootInterval)
+            {
+                _passedTime = 0;
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _currentWeaponInfo.ShootRange))
+                    ShootAction?.Invoke();
+            }
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             AddStickMan(other);
@@ -81,7 +102,7 @@ namespace HumanGun.GunRelated
         private void AddStickMan(Collider other)
         {
 
-            if (_stickManList.Count > 28)
+            if (_stickManList.Count > 30)
             {
                 Destroy(other.gameObject);
                 GameManager.Instance.AddMoney(10);
@@ -138,6 +159,8 @@ namespace HumanGun.GunRelated
             {
                 animator.SetTrigger("IsRunning");
                 ShootAction = null;
+                AssignColliderPorperites(defaultColliderCenter, defaultColliderSize);
+
                 return;
             }
             if (_stickManList.Count >= grenadeLauncherInfo.SwitchAmount)
@@ -168,58 +191,34 @@ namespace HumanGun.GunRelated
             switch (gunModeToSwitch)
             {
                 case GunMode.Pistol:
-                    PistolConfiguration();
+                    AssignConfiguration(GunMode.Pistol, pistolInfo, pistolStickMenConfiguration, pistolColliderCenter, pistolColliderSize);
                     break;
                 case GunMode.Rifle:
-                    RifleConfiguration();
+                    AssignConfiguration(GunMode.Rifle, rifleInfo, rifleStickMenConfiguration, rifleColliderCenter, rifleColliderSize);
                     break;
                 case GunMode.Shotgun:
-                    ShotgunConfiguration();
+                    AssignConfiguration(GunMode.Shotgun, shotgunInfo, shotgunStickMenConfiguration, shotgunColliderCenter, shotgunColliderSize);
                     break;
                 case GunMode.GrenadeLaucher:
-                    GrenadeLauncherConfiguration();
+                    AssignConfiguration(GunMode.GrenadeLaucher, grenadeLauncherInfo, grenadeLauncherStickMenConfiguration, grenadeLauncherColliderCenter, grenadeLauncherColliderSize);
                     break;
             }
-        }
-        private void PistolConfiguration()
-        {
-            _currentGunMode = GunMode.Pistol;
-            _currentWeaponInfo = pistolInfo;
-            _currentStickMenConfiguration = pistolStickMenConfiguration;
-            for(int i = 0; i < _stickManList.Count; i++)
-            {
-                _stickManList[i].RepositionStickMan(_currentStickMenConfiguration[i].PoseIndex, _currentStickMenConfiguration[i].LocalTransform);
-            }
-        }
-        private void RifleConfiguration()
-        {
-            _currentGunMode = GunMode.Rifle;
-            _currentWeaponInfo = rifleInfo;
-            _currentStickMenConfiguration = rifleStickMenConfiguration;
             for (int i = 0; i < _stickManList.Count; i++)
             {
                 _stickManList[i].RepositionStickMan(_currentStickMenConfiguration[i].PoseIndex, _currentStickMenConfiguration[i].LocalTransform);
             }
         }
-        private void ShotgunConfiguration()
+        private void AssignConfiguration(GunMode gunMode, WeaponInfo weaponInfo, StickMenConfiguration[] stickmenConfiguration, Vector3 colliderCenter, Vector3 colliderSize)
         {
-            _currentGunMode = GunMode.Shotgun;
-            _currentWeaponInfo = shotgunInfo;
-            _currentStickMenConfiguration = shotgunStickMenConfiguration;
-            for (int i = 0; i < _stickManList.Count; i++)
-            {
-                _stickManList[i].RepositionStickMan(_currentStickMenConfiguration[i].PoseIndex, _currentStickMenConfiguration[i].LocalTransform);
-            }
+            _currentGunMode = gunMode;
+            _currentWeaponInfo = weaponInfo;
+            _currentStickMenConfiguration = stickmenConfiguration;
+            AssignColliderPorperites(colliderCenter, colliderSize);
         }
-        private void GrenadeLauncherConfiguration()
+        private void AssignColliderPorperites(Vector3 center, Vector3 size)
         {
-            _currentGunMode = GunMode.GrenadeLaucher;
-            _currentWeaponInfo = grenadeLauncherInfo;
-            _currentStickMenConfiguration = grenadeLauncherStickMenConfiguration;
-            for (int i = 0; i < _stickManList.Count; i++)
-            {
-                _stickManList[i].RepositionStickMan(_currentStickMenConfiguration[i].PoseIndex, _currentStickMenConfiguration[i].LocalTransform);
-            }
+            _collider.center = center;
+            _collider.size = size;
         }
         #endregion
 
@@ -271,9 +270,8 @@ namespace HumanGun.GunRelated
         }
         private void GrenadeLauncherShoot()
         {
-
             GameObject spawnedBullet = Instantiate(explosiveProjectile, transform.position + Vector3.up * 0.5f, Quaternion.identity);
-            spawnedBullet.GetComponent<BulletProjectile>().ShootBullet(new Vector3(0, 3, grenadeLauncherInfo.BulletSpeed), grenadeLauncherInfo.BulletDamage);
+            spawnedBullet.GetComponent<BulletProjectile>().ShootBullet(new Vector3(0, 10, grenadeLauncherInfo.BulletSpeed), grenadeLauncherInfo.BulletDamage);
         }
         #endregion
     }
@@ -299,4 +297,5 @@ namespace HumanGun.GunRelated
         public float BulletSpeed;
         public int BulletDamage;
     }
+
 }
