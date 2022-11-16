@@ -17,7 +17,5 @@ namespace HumanGun.Managers
             base.Awake();
             GameStateHandler.ChangeState(GameState.GameAwaitingStart);
         }
-
-
     }
 }

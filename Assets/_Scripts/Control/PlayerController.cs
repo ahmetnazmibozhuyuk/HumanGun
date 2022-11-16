@@ -16,7 +16,7 @@ namespace HumanGun.Control
         private float _hitDownPositionx;
         private float _offsetx;
 
-
+        [SerializeField] private Vector3 initialPosition;
         private void Update()
         {
 #if UNITY_EDITOR
@@ -67,9 +67,9 @@ namespace HumanGun.Control
                 _offsetx = 0;
             }
         }
-
 #endif
-        
+       
+
         private void AssignMovement(float xDisplacement)
         {
             transform.position = (new Vector3(
@@ -83,6 +83,20 @@ namespace HumanGun.Control
             {
                 GameStateHandler.ChangeState(GameState.GameStarted);
             }
+        }
+        private void OnEnable()
+        {
+            GameStateHandler.OnGameAwaitingStartState += InitializePosition;
+        }
+        private void OnDisable()
+        {
+            GameStateHandler.OnGameAwaitingStartState -= InitializePosition;
+        }
+
+        private void InitializePosition()
+        {
+
+            transform.position = initialPosition;
         }
     }
 }

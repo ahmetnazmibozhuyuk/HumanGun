@@ -1,6 +1,4 @@
 using HumanGun.Managers;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace HumanGun.Control
@@ -10,6 +8,7 @@ namespace HumanGun.Control
         [Tooltip("Higher the value is, lower the delay will be.")]
         [SerializeField] private float cameraPositionDelay = 1;
 
+        [SerializeField] private Vector3 initialPosition;
         private void LateUpdate()
         {
             CamPosition();
@@ -17,6 +16,20 @@ namespace HumanGun.Control
         private void CamPosition()
         {
             transform.position =  Vector3.Lerp(transform.position, GameManager.Instance.PlayerObject.transform.position, Time.deltaTime * cameraPositionDelay);
+        }
+        private void OnEnable()
+        {
+            GameStateHandler.OnGameAwaitingStartState += InitializePosition;
+        }
+        private void OnDisable()
+        {
+            GameStateHandler.OnGameAwaitingStartState -= InitializePosition;
+        }
+
+        private void InitializePosition()
+        {
+
+            transform.position = initialPosition;
         }
     }
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7804947055303035607}
   - component: {fileID: 6629129789818963314}
   - component: {fileID: 8942901061330301368}
+  - component: {fileID: 7813196675176611496}
   m_Layer: 0
   m_Name: PRE_obscatle_2
   m_TagString: Untagged
@@ -85,3 +86,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7813196675176611496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429652209377333357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6ebd4929ecd454289de71a93812c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 5

@@ -39,10 +39,6 @@ namespace HumanGun.GunRelated
         private float _passedTime;
         private RaycastHit hit;
 
-        private void Awake()
-        {
-            animator = GetComponent<Animator>();
-        }
         private void ShootLoop()
         {
 
@@ -76,12 +72,13 @@ namespace HumanGun.GunRelated
         private void OnTriggerEnter(Collider other)
         {
             AddStickMan(other);
-            HitObstacle(other);
+            HitDestructable(other);
+            HitIndestructable(other);
         }
         private void AddStickMan(Collider other)
         {
-            if (other.gameObject.GetComponent<IStickAdded>() == null) return;
-            IStickAdded stickMan = other.gameObject.GetComponent<IStickAdded>();
+            if (!other.gameObject.TryGetComponent<IStickAdded>(out var stickMan)) return;
+            
             _stickManList.Add(stickMan);
             CheckIfShouldSwitch();
             Debug.Log("added stickman, new count ="+_stickManList.Count);
@@ -89,12 +86,18 @@ namespace HumanGun.GunRelated
             stickMan.RepositionStickMan(_currentStickMenConfiguration[_stickManList.Count].PoseIndex, _currentStickMenConfiguration[_stickManList.Count].LocalTransform);
             animator.SetTrigger(PoseNames[0]);
         }
-        private void HitObstacle(Collider other)
+        private void HitDestructable(Collider other)
         {
-            if (other.gameObject.GetComponent<IObstacleInteraction>() == null) return;
-            IObstacleInteraction interactedObstacle = other.gameObject.GetComponent<IObstacleInteraction>();
+            if (!other.gameObject.TryGetComponent<IObstacleInteraction>(out var interactedObstacle)) return;
+            
             RemoveStickMan(interactedObstacle.CurrentLives);
             interactedObstacle.HitObstacle(_stickManList.Count);
+        }
+        private void HitIndestructable(Collider other)
+        {
+            if (!other.gameObject.TryGetComponent<IIndestructableObstacle>(out var indestructableObstacle)) return;
+
+            RemoveStickMan(indestructableObstacle.HitAmount());
         }
 
         public void RemoveStickMan(int stickManAmount)
@@ -171,18 +174,30 @@ namespace HumanGun.GunRelated
             _currentGunMode = GunMode.Pistol;
             _currentWeaponInfo = pistolInfo;
             _currentStickMenConfiguration = pistolStickMenConfiguration;
+            for(int i = 0; i < _stickManList.Count; i++)
+            {
+                _stickManList[i].RepositionStickMan(_currentStickMenConfiguration[i].PoseIndex, _currentStickMenConfiguration[i].LocalTransform);
+            }
         }
         private void RifleConfiguration()
         {
             _currentGunMode = GunMode.Rifle;
             _currentWeaponInfo = rifleInfo;
             _currentStickMenConfiguration = rifleStickMenConfiguration;
+            for (int i = 0; i < _stickManList.Count; i++)
+            {
+                _stickManList[i].RepositionStickMan(_currentStickMenConfiguration[i].PoseIndex, _currentStickMenConfiguration[i].LocalTransform);
+            }
         }
         private void ShotgunConfiguration()
         {
             _currentGunMode = GunMode.Shotgun;
             _currentWeaponInfo = shotgunInfo;
             _currentStickMenConfiguration = shotgunStickMenConfiguration;
+            for (int i = 0; i < _stickManList.Count; i++)
+            {
+                _stickManList[i].RepositionStickMan(_currentStickMenConfiguration[i].PoseIndex, _currentStickMenConfiguration[i].LocalTransform);
+            }
         }
         #endregion
 
