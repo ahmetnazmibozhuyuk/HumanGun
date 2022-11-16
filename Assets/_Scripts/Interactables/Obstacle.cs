@@ -1,20 +1,28 @@
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 
 namespace HumanGun.Interactable
 {
     public class Obstacle : MonoBehaviour, IObstacleInteraction
     {
         [SerializeField] private int maxLivesAmount = 2;
+        [SerializeField] private TextMeshProUGUI remainingHealthText;
 
         public int CurrentLives { get; set; }
         private void Awake()
         {
             CurrentLives = maxLivesAmount;
+
+        }
+        private void Start()
+        {
+            remainingHealthText.SetText(CurrentLives.ToString());
         }
         public void HitObstacle(int hitAmount)
         {
             CurrentLives -= hitAmount;
+            remainingHealthText.SetText(CurrentLives.ToString());
             if (CurrentLives <= 0)
             {
                 Destroy(gameObject);
