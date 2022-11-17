@@ -24,6 +24,7 @@ namespace HumanGun.GunRelated
         [SerializeField]private WeaponInfo grenadeLauncherInfo;
 
         [SerializeField] private float shotgunScatterAmount = 2f;
+        [SerializeField] private float grenadeLauncherVerticalVelocity = 2f;
 
         private WeaponInfo _currentWeaponInfo;
 
@@ -40,6 +41,8 @@ namespace HumanGun.GunRelated
 
         private float _passedTime;
         private RaycastHit hit;
+
+        private Transform _currentShootingTransform;
 
         #region Collider Properties
         private readonly Vector3 defaultColliderCenter = new Vector3(0, 0.25f, 0);
@@ -245,21 +248,21 @@ namespace HumanGun.GunRelated
         }
         private void PistolShoot()
         {
-            GameObject spawnedBullet = Instantiate(bulletProjectile, transform.position + Vector3.up * 0.5f, Quaternion.identity);
+            GameObject spawnedBullet = Instantiate(bulletProjectile, pistolInfo.ShootingTransform.position, Quaternion.identity);
             spawnedBullet.GetComponent<BulletProjectile>().ShootBullet(new Vector3(0, 0, 20),1);
         }
 
         private void RifleShoot()
         {
             
-            GameObject spawnedBullet = Instantiate(bulletProjectile, transform.position + Vector3.up * 0.5f, Quaternion.identity);
+            GameObject spawnedBullet = Instantiate(bulletProjectile, rifleInfo.ShootingTransform.position, Quaternion.identity);
             spawnedBullet.GetComponent<BulletProjectile>().ShootBullet(new Vector3(0, 0, rifleInfo.BulletSpeed),rifleInfo.BulletDamage);
         }
         private void ShotgunShoot()
         {
             for(int i = 0; i < UnityEngine.Random.Range(3,6); i++)
             {
-                GameObject spawnedBullet = Instantiate(bulletProjectile, transform.position + Vector3.up * 0.5f, Quaternion.identity);
+                GameObject spawnedBullet = Instantiate(bulletProjectile, shotgunInfo.ShootingTransform.position, Quaternion.identity);
                 spawnedBullet.GetComponent<BulletProjectile>().ShootBullet(new Vector3
                     (UnityEngine.Random.Range(-shotgunScatterAmount, shotgunScatterAmount), 
                     UnityEngine.Random.Range(-shotgunScatterAmount, shotgunScatterAmount), 
@@ -270,8 +273,8 @@ namespace HumanGun.GunRelated
         }
         private void GrenadeLauncherShoot()
         {
-            GameObject spawnedBullet = Instantiate(explosiveProjectile, transform.position + Vector3.up * 0.5f, Quaternion.identity);
-            spawnedBullet.GetComponent<BulletProjectile>().ShootBullet(new Vector3(0, 10, grenadeLauncherInfo.BulletSpeed), grenadeLauncherInfo.BulletDamage);
+            GameObject spawnedBullet = Instantiate(explosiveProjectile, grenadeLauncherInfo.ShootingTransform.position, Quaternion.identity);
+            spawnedBullet.GetComponent<ExplosiveProjectile>().ShootBullet(new Vector3(0, grenadeLauncherVerticalVelocity, grenadeLauncherInfo.BulletSpeed), grenadeLauncherInfo.BulletDamage);
         }
         #endregion
     }
@@ -296,6 +299,7 @@ namespace HumanGun.GunRelated
         public float ShootRange;
         public float BulletSpeed;
         public int BulletDamage;
+        public Transform ShootingTransform;
     }
 
 }

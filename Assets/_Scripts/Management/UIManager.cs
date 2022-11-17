@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace HumanGun.Managers
@@ -8,6 +7,17 @@ namespace HumanGun.Managers
     {
 
 
+        [SerializeField] private TextMeshProUGUI moneyText;
+
+        private void Start()
+        {
+            moneyText.SetText("Money: " + GameManager.MoneyAmount.ToString());
+        }
+        public void AddMoney(float moneyToAdd)
+        {
+            PlayerPrefs.SetFloat(GameManager.MoneyAmountKey, moneyToAdd+GameManager.MoneyAmount);
+            moneyText.SetText("Money: "+GameManager.MoneyAmount.ToString());
+        }
 
     }
 }

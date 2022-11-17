@@ -13,14 +13,14 @@ namespace HumanGun.GunRelated
         private int _hitAmount = 1;
         private WaitForSeconds _despawnDelay = new WaitForSeconds(2);
 
-        private List<IObstacleInteraction> aoeTargets;
+        private List<IObstacleInteraction> aoeTargets = new List<IObstacleInteraction>();
         private void Awake()
         {
             _rigidbody= GetComponent<Rigidbody>();
         }
         private void OnEnable()
         {
-            Invoke(nameof(DespawnWithTime),3f);
+            Invoke(nameof(Explode),3f);
         }
         public void ShootBullet(Vector3 startVelocity, int hitAmount)
         {
@@ -29,32 +29,36 @@ namespace HumanGun.GunRelated
         }
         private void OnCollisionEnter(Collision collision)
         {
-            DespawnWithTime();
+            if (collision.gameObject.CompareTag("Player")) return;
+            
+            Debug.Log(collision.gameObject.name,collision.gameObject);
+            Explode();
+
         }
         private void OnTriggerEnter(Collider other)
         {
             if (other.GetComponent<IObstacleInteraction>() == null) return;
 
-            aoeTargets.Remove(other.GetComponent<IObstacleInteraction>());
+            aoeTargets.Add(other.GetComponent<IObstacleInteraction>());
 
         }
         private void OnTriggerExit(Collider other)
         {
             if (other.GetComponent<IObstacleInteraction>() == null) return;
 
-            aoeTargets.Add(other.GetComponent<IObstacleInteraction>());
+            aoeTargets.Remove(other.GetComponent<IObstacleInteraction>());
         }
-        private void TriggerExplosion()
+        private void Explode()
         {
-
-        }
-        private void DespawnWithTime()
-        {
-
-            for (int i = 0; i < aoeTargets.Count; i++)
+            if(aoeTargets.Count > 0)
             {
-                aoeTargets[i].HitObstacle(_hitAmount);
+                for (int i = 0; i < aoeTargets.Count; i++)
+                {
+                    aoeTargets[i].HitObstacle(_hitAmount);
+                }
             }
+
+
             HitExplosion();
             Destroy(gameObject);
         }
