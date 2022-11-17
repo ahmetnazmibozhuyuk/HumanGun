@@ -106,6 +106,7 @@ namespace HumanGun.GunRelated
         }
         private void AddStickMan(Collider other)
         {
+            if (!other.gameObject.TryGetComponent<IStickAdded>(out var stickMan)) return;
 
             if (_stickManList.Count > 30)
             {
@@ -114,8 +115,6 @@ namespace HumanGun.GunRelated
                 return;
             }
 
-            if (!other.gameObject.TryGetComponent<IStickAdded>(out var stickMan)) return;
-            
             _stickManList.Add(stickMan);
             _attachedStickManTransform.Add(other.transform);
             CheckIfShouldSwitch();

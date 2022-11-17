@@ -31,7 +31,6 @@ namespace HumanGun.GunRelated
         {
             if (collision.gameObject.CompareTag("Player")) return;
 
-            Debug.Log(collision.gameObject.name, collision.gameObject);
             Explode();
 
         }
