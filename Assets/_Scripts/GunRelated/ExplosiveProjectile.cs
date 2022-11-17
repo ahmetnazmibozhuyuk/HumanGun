@@ -14,13 +14,14 @@ namespace HumanGun.GunRelated
         private WaitForSeconds _despawnDelay = new WaitForSeconds(2);
 
         private List<IObstacleInteraction> aoeTargets = new List<IObstacleInteraction>();
+        private List<GameObject> aoeTargetObjects = new List<GameObject>();
         private void Awake()
         {
-            _rigidbody= GetComponent<Rigidbody>();
+            _rigidbody = GetComponent<Rigidbody>();
         }
         private void OnEnable()
         {
-            Invoke(nameof(Explode),3f);
+            Invoke(nameof(Explode), 3f);
         }
         public void ShootBullet(Vector3 startVelocity, int hitAmount)
         {
@@ -39,6 +40,7 @@ namespace HumanGun.GunRelated
             if (other.GetComponent<IObstacleInteraction>() == null) return;
 
             aoeTargets.Add(other.GetComponent<IObstacleInteraction>());
+            aoeTargetObjects.Add(other.gameObject);
 
         }
         private void OnTriggerExit(Collider other)
@@ -46,14 +48,16 @@ namespace HumanGun.GunRelated
             if (other.GetComponent<IObstacleInteraction>() == null) return;
 
             aoeTargets.Remove(other.GetComponent<IObstacleInteraction>());
+            aoeTargetObjects.Remove(other.gameObject);
         }
         private void Explode()
         {
-            if(aoeTargets.Count > 0)
+            if (aoeTargets.Count > 0)
             {
                 for (int i = 0; i < aoeTargets.Count; i++)
                 {
-                    aoeTargets[i].HitObstacle(_hitAmount);
+                    if (aoeTargetObjects[i] != null)
+                        aoeTargets[i].HitObstacle(_hitAmount);
                 }
             }
 

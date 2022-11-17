@@ -1,6 +1,7 @@
 using HumanGun.GunRelated;
 using UnityEngine;
 using DG.Tweening;
+using HumanGun.Managers;
 
 namespace HumanGun.Interactable
 {
@@ -14,6 +15,8 @@ namespace HumanGun.Interactable
         private Tweener _positionTweener;
         private Tweener _rotationTweener;
 
+        [SerializeField] private Renderer meshRenderer;
+
         private void Awake()
         {
             _animator = GetComponent<Animator>();
@@ -23,13 +26,14 @@ namespace HumanGun.Interactable
         {
             transform.parent = gunTransform;
         }
-        public void RepositionStickMan(int poseIndex, Transform newLocalTransform)
+        public void RepositionStickMan(int poseIndex, Transform newLocalTransform,ColorList colorList)
         {
             _positionTweener.Kill();
             _rotationTweener.Kill();
             _animator.SetTrigger(GunHandler.PoseNames[poseIndex]);
            _positionTweener = transform.DOLocalMove(newLocalTransform.localPosition, 0.5f);
             _rotationTweener = transform.DOLocalRotateQuaternion(newLocalTransform.localRotation, 0.5f);
+            meshRenderer.material = GameManager.Instance.StickMaterial(colorList);
         }
 
         public void RemoveStickMan()

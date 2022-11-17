@@ -59,6 +59,14 @@ namespace HumanGun.GunRelated
         private readonly Vector3 shotgunColliderSize = new Vector3(0.6f, 1, 0.9f);
         private readonly Vector3 grenadeLauncherColliderSize = new Vector3(0.6f, 1, 0.9f);
         #endregion
+
+        [SerializeField] private Material redMat;
+        [SerializeField] private Material greenMat;
+        [SerializeField] private Material blueMat;
+        [SerializeField] private Material blackMat;
+        [SerializeField] private Material whiteMat;
+        [SerializeField] private Material yellowMat;
+        
         private void Awake()
         {
             _collider = GetComponent<BoxCollider>();
@@ -119,7 +127,8 @@ namespace HumanGun.GunRelated
             _attachedStickManTransform.Add(other.transform);
             CheckIfShouldSwitch();
             stickMan.AddStickMan(transform);
-            stickMan.RepositionStickMan(_currentStickMenConfiguration[_stickManList.Count].PoseIndex, _currentStickMenConfiguration[_stickManList.Count].LocalTransform);
+            stickMan.RepositionStickMan(_currentStickMenConfiguration[_stickManList.Count].PoseIndex,
+                _currentStickMenConfiguration[_stickManList.Count].LocalTransform, _currentStickMenConfiguration[_stickManList.Count].ColorList);
             animator.SetTrigger(PoseNames[0]);
         }
         private void HitDestructable(Collider other)
@@ -219,7 +228,7 @@ namespace HumanGun.GunRelated
             }
             for (int i = 0; i < _stickManList.Count; i++)
             {
-                _stickManList[i].RepositionStickMan(_currentStickMenConfiguration[i].PoseIndex, _currentStickMenConfiguration[i].LocalTransform);
+                _stickManList[i].RepositionStickMan(_currentStickMenConfiguration[i].PoseIndex, _currentStickMenConfiguration[i].LocalTransform, _currentStickMenConfiguration[i].ColorList);
             }
         }
         private void AssignConfiguration(GunMode gunMode, WeaponInfo weaponInfo, StickMenConfiguration[] stickmenConfiguration, Vector3 colliderCenter, Vector3 colliderSize)
@@ -333,10 +342,11 @@ namespace HumanGun.GunRelated
 
     #region Related enums, Interfaces and Structs
     public enum GunMode { Idle = 0, Pistol = 1, Rifle = 2, Shotgun = 3, GrenadeLaucher = 4 }
+    public enum ColorList { Black = 0, White = 1, Red = 2, Green = 3, Blue = 4, Yellow = 5 }
     public interface IStickAdded
     {
         public void AddStickMan(Transform gunTransform);
-        public void RepositionStickMan(int poseIndex, Transform newLocalTransform);
+        public void RepositionStickMan(int poseIndex, Transform newLocalTransform, ColorList colorList);
         public void RemoveStickMan();
     }
     [Serializable]
@@ -344,6 +354,7 @@ namespace HumanGun.GunRelated
     {
         public Transform LocalTransform;
         public int PoseIndex;
+        public ColorList ColorList;
     }
     [Serializable]
     public struct WeaponInfo

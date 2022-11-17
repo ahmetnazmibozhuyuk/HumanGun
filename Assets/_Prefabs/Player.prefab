@@ -171,8 +171,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1209185723618689813}
   - component: {fileID: 8262018051202524734}
-  - component: {fileID: 8262018051202524723}
-  - component: {fileID: 8262018051202524732}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -217,35 +215,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8262018051202524723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985019461072345519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 389e6a41fbd15b5498d0dbaff83e527a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletProjectile: {fileID: 3495290998933180879, guid: b84254ae77d27f645a749b8fe7d3b16e, type: 3}
---- !u!114 &8262018051202524732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985019461072345519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89d90445696b4bb4fb667504ba445825, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxControlSpeed: 1
-  maxForwardSpeed: 1
-  horizontalClampLimit: 1.63
-  keyboardSpeed: 12
 --- !u!1 &2403739394713285765
 GameObject:
   m_ObjectHideFlags: 0

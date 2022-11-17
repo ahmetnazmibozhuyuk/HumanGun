@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using ObjectPooling;
 using HumanGun.GunRelated;
+using System.Drawing;
+using UnityEditor.Experimental.GraphView;
 
 namespace HumanGun.Managers
 {
@@ -33,6 +35,15 @@ namespace HumanGun.Managers
 
         #endregion
 
+        #region Color Related
+        [SerializeField] private Material redMat;
+        [SerializeField] private Material greenMat;
+        [SerializeField] private Material blueMat;
+        [SerializeField] private Material blackMat;
+        [SerializeField] private Material whiteMat;
+        [SerializeField] private Material yellowMat;
+        #endregion
+
         protected override void Awake()
         {
             base.Awake();
@@ -48,15 +59,47 @@ namespace HumanGun.Managers
         public void AddMoney(float amountToAdd)
         {
             _uiManager.AddMoney(amountToAdd);
+
             
         }
         public void StartLevel()
         {
             HasWon = false;
+
+            _levelManager.LoadCurrentLevel();
         }
         public void PassedFinishLine()
         {
             HasWon = true;
+        }
+
+        public void RestartLevel()
+        {
+
+        }
+        public void NextLevel()
+        {
+        }
+
+        public Material StickMaterial(ColorList color)
+        {
+            switch (color)
+            {
+                case ColorList.Blue:
+                    return blueMat;
+                case ColorList.White:
+                    return whiteMat;
+                case ColorList.Yellow:
+                    return yellowMat;
+                case ColorList.Red:
+                    return redMat;
+                case ColorList.Black:
+                    return blackMat;
+                case ColorList.Green:
+                    return greenMat;
+                default:
+                    return whiteMat;
+            }
         }
     }
 }
