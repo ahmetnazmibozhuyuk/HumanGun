@@ -4,6 +4,7 @@ using UnityEngine;
 using HumanGun.Managers;
 using System;
 using HumanGun.Interactable;
+using DG.Tweening;
 
 namespace HumanGun.GunRelated
 {
@@ -29,6 +30,7 @@ namespace HumanGun.GunRelated
         private WeaponInfo _currentWeaponInfo;
 
         private List<IStickAdded> _stickManList = new List<IStickAdded>();
+        private List<Transform> _attachedStickManTransform = new List<Transform>();
 
         private StickMenConfiguration[] _currentStickMenConfiguration;
 
@@ -115,6 +117,7 @@ namespace HumanGun.GunRelated
             if (!other.gameObject.TryGetComponent<IStickAdded>(out var stickMan)) return;
             
             _stickManList.Add(stickMan);
+            _attachedStickManTransform.Add(other.transform);
             CheckIfShouldSwitch();
             stickMan.AddStickMan(transform);
             stickMan.RepositionStickMan(_currentStickMenConfiguration[_stickManList.Count].PoseIndex, _currentStickMenConfiguration[_stickManList.Count].LocalTransform);
@@ -141,18 +144,27 @@ namespace HumanGun.GunRelated
                 if (_stickManList.Count > 0)
                 {
                     _stickManList[_stickManList.Count - 1].RemoveStickMan();
+                    _attachedStickManTransform.RemoveAt(_stickManList.Count - 1);
                     _stickManList.RemoveAt(_stickManList.Count - 1);
                     CheckIfShouldSwitch();
                     continue;
                 }
-                GameLost();
+                GameIsFinished();
                 break;
             }
         }
-        private void GameLost()
+        private void GameIsFinished()
         {
             animator.SetTrigger("IsDead");
-            GameStateHandler.ChangeState(GameState.GameLost);
+            if (GameManager.Instance.HasWon)
+            {
+                GameStateHandler.ChangeState(GameState.GameWon);
+            }
+            else
+            {
+                GameStateHandler.ChangeState(GameState.GameLost);
+            }
+
         }
 
         #region Gun Mode Switch and Configuration
@@ -250,6 +262,14 @@ namespace HumanGun.GunRelated
         {
             GameObject spawnedBullet = Instantiate(bulletProjectile, pistolInfo.ShootingTransform.position, Quaternion.identity);
             spawnedBullet.GetComponent<BulletProjectile>().ShootBullet(new Vector3(0, 0, 20),1);
+            for(int i = 2; i <= 4; i++)
+            {
+                if (i < _attachedStickManTransform.Count)
+                {
+                    _attachedStickManTransform[i].DOLocalMove((_attachedStickManTransform[i].transform.localPosition - Vector3.forward * 0.1f), 0.1f);
+                    StartCoroutine(Co_StickRecoilReset(_attachedStickManTransform[i]));
+                }
+            }
         }
 
         private void RifleShoot()
@@ -257,6 +277,15 @@ namespace HumanGun.GunRelated
             
             GameObject spawnedBullet = Instantiate(bulletProjectile, rifleInfo.ShootingTransform.position, Quaternion.identity);
             spawnedBullet.GetComponent<BulletProjectile>().ShootBullet(new Vector3(0, 0, rifleInfo.BulletSpeed),rifleInfo.BulletDamage);
+
+            for (int i = 2; i <= 8; i++)
+            {
+                if (i < _attachedStickManTransform.Count)
+                {
+                    _attachedStickManTransform[i].DOLocalMove((_attachedStickManTransform[i].transform.localPosition - Vector3.forward * 0.1f), 0.1f);
+                    StartCoroutine(Co_StickRecoilReset(_attachedStickManTransform[i]));
+                }
+            }
         }
         private void ShotgunShoot()
         {
@@ -270,14 +299,40 @@ namespace HumanGun.GunRelated
                     shotgunInfo.BulletDamage);
             }
 
+            for (int i = 2; i <= 10; i++)
+            {
+                if (i < _attachedStickManTransform.Count)
+                {
+                    _attachedStickManTransform[i].DOLocalMove((_attachedStickManTransform[i].transform.localPosition - Vector3.forward * 0.1f), 0.1f);
+                    StartCoroutine(Co_StickRecoilReset(_attachedStickManTransform[i]));
+                }
+            }
+
         }
         private void GrenadeLauncherShoot()
         {
             GameObject spawnedBullet = Instantiate(explosiveProjectile, grenadeLauncherInfo.ShootingTransform.position, Quaternion.identity);
             spawnedBullet.GetComponent<ExplosiveProjectile>().ShootBullet(new Vector3(0, grenadeLauncherVerticalVelocity, grenadeLauncherInfo.BulletSpeed), grenadeLauncherInfo.BulletDamage);
+
+            for (int i = 2; i <= 18; i++)
+            {
+                if (i < _attachedStickManTransform.Count)
+                {
+                    _attachedStickManTransform[i].DOLocalMove((_attachedStickManTransform[i].transform.localPosition - Vector3.forward * 0.1f), 0.1f);
+                    StartCoroutine(Co_StickRecoilReset(_attachedStickManTransform[i]));
+                }
+            }
+        }
+
+        private IEnumerator Co_StickRecoilReset(Transform stickTransform)
+        {
+            yield return new WaitForSeconds(0.1f);
+            stickTransform.DOLocalMove((stickTransform.transform.localPosition + Vector3.forward * 0.1f), 0.1f);
         }
         #endregion
     }
+
+    #region Related enums, Interfaces and Structs
     public enum GunMode { Idle = 0, Pistol = 1, Rifle = 2, Shotgun = 3, GrenadeLaucher = 4 }
     public interface IStickAdded
     {
@@ -301,5 +356,5 @@ namespace HumanGun.GunRelated
         public int BulletDamage;
         public Transform ShootingTransform;
     }
-
+    #endregion
 }

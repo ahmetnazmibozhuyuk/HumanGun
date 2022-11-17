@@ -30,8 +30,8 @@ namespace HumanGun.GunRelated
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Player")) return;
-            
-            Debug.Log(collision.gameObject.name,collision.gameObject);
+
+            Debug.Log(collision.gameObject.name, collision.gameObject);
             Explode();
 
         }
