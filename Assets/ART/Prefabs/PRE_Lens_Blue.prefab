@@ -319,6 +319,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &2394154683306686652
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6588848910546596981}
+  m_Layer: 0
+  m_Name: SpawnTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6588848910546596981
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2394154683306686652}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.633, y: 0.285, z: -0.293}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2524804665237700472}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2900943626786678210
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,6 +359,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2524804665237700472}
+  - component: {fileID: 87137811788194873}
+  - component: {fileID: 2721010642442209310}
   m_Layer: 0
   m_Name: PRE_Lens_Blue
   m_TagString: Untagged
@@ -351,9 +384,39 @@ Transform:
   - {fileID: 1463168969494646804}
   - {fileID: 7423873930754991820}
   - {fileID: 7696984296943508933}
+  - {fileID: 6588848910546596981}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &87137811788194873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2900943626786678210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 218e8d925c3731d4eaf8bda6aab91d17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountToSpawn: 3
+  stickManPrefab: {fileID: 4490437667922997639, guid: c96393a9719df5541a15528d755c87fd, type: 3}
+  additionAmountText: {fileID: 4287799409279691882}
+  spawnTransform: {fileID: 6588848910546596981}
+--- !u!65 &2721010642442209310
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2900943626786678210}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7, y: 1, z: 0.1}
+  m_Center: {x: 0.92, y: 0, z: 0}
 --- !u!1 &5453783225196616160
 GameObject:
   m_ObjectHideFlags: 0
