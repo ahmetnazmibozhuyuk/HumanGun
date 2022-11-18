@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HumanGun.Interactable
+namespace HumanGun
 {
-    public class Lens : MonoBehaviour
+    public class IndestructableObstacle : MonoBehaviour
     {
-
-
 
 
     }

@@ -193,7 +193,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2524804665237700472}
-  - component: {fileID: 2465975657429236542}
+  - component: {fileID: 8004942770128451675}
+  - component: {fileID: 6359218037622989637}
   m_Layer: 0
   m_Name: PRE_Lens_Red
   m_TagString: Untagged
@@ -220,7 +221,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &2465975657429236542
+--- !u!114 &8004942770128451675
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -229,11 +230,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 2900943626786678210}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04f4f4cd7e31dc74a9b5fa03bca49a17, type: 3}
+  m_Script: {fileID: 11500000, guid: e5ac654684a560b438b3e1a88771b042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLivesAmount: 2
-  remainingHealthText: {fileID: 0}
+  lifeText: {fileID: 6942660391367146596}
+  hitAmount: 3
+--- !u!65 &6359218037622989637
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2900943626786678210}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7, y: 1, z: 0.1}
+  m_Center: {x: 0.92, y: 0, z: 0}
 --- !u!1 &5453783225196616160
 GameObject:
   m_ObjectHideFlags: 0
