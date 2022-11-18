@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3731274153902212523}
   - component: {fileID: 2307754835503696723}
   - component: {fileID: 5505951998195960656}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 2086732545206190324}
   - component: {fileID: 4335741773880564678}
   - component: {fileID: 6754671909688022451}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: RemainingHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 7514826770275807124}
   - component: {fileID: 5741790905299524446}
   - component: {fileID: 8090574475181791676}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PRE_stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}

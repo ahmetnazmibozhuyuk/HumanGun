@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6534557512031471732}
   - component: {fileID: 7854474540216223697}
   - component: {fileID: 5396514889283990299}
+  - component: {fileID: 2085298942159290164}
+  - component: {fileID: 3724676417475934255}
   m_Layer: 0
   m_Name: PRE_obstacle
   m_TagString: Untagged
@@ -84,3 +86,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2085298942159290164
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5901045659440468686}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.8812315, y: 0.29520336, z: 0.27568638}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3724676417475934255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5901045659440468686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3f3413f671e15d40823904d42e27e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitAmount: 2

@@ -1,5 +1,4 @@
 using HumanGun.Interactable;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -60,7 +59,6 @@ namespace HumanGun.GunRelated
                         aoeTargets[i].HitObstacle(_hitAmount);
                 }
             }
-
 
             HitExplosion();
             Destroy(gameObject);
