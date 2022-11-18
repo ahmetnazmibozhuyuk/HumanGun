@@ -1,6 +1,5 @@
 using DG.Tweening;
 using HumanGun.Interactable;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -16,6 +15,12 @@ namespace HumanGun
         [SerializeField] private TextMeshProUGUI remainingHealthText;
 
         [SerializeField] private LayerMask _layerMask;
+
+        private void Start()
+        {
+            CurrentLives = maxLivesAmount;
+            remainingHealthText.SetText(CurrentLives.ToString());
+        }
 
         public void HitObstacle(int hitAmount)
         {

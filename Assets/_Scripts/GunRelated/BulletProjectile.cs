@@ -24,11 +24,11 @@ namespace HumanGun.GunRelated
             _rigidbody.velocity = startVelocity;
             _hitAmount = hitAmount;
         }
-        private void OnTriggerEnter(Collider other)
+        private void OnCollisionEnter(Collision collision)
         {
-            if (other.GetComponent<IObstacleInteraction>() == null) return;
+            if (collision.gameObject.GetComponent<IObstacleInteraction>() == null) return;
 
-            other.GetComponent<IObstacleInteraction>().HitObstacle(_hitAmount);
+            collision.gameObject.GetComponent<IObstacleInteraction>().HitObstacle(_hitAmount);
             HitExplosion();
             Destroy(gameObject);
         }
