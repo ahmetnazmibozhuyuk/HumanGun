@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace HumanGun.Managers
@@ -36,11 +34,11 @@ namespace HumanGun.Managers
             }
             if (CurrentLevel >= levels.Length)
             {
-                Instantiate(levels[Random.Range(0, levels.Length)]);
+                _currentLevelObject = Instantiate(levels[Random.Range(0, levels.Length)]);
             }
             else
             {
-                Instantiate(levels[CurrentLevel]);
+                _currentLevelObject = Instantiate(levels[CurrentLevel]);
             }
         }
     }

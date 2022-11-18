@@ -60,13 +60,7 @@ namespace HumanGun.GunRelated
         private readonly Vector3 grenadeLauncherColliderSize = new Vector3(0.6f, 1, 0.9f);
         #endregion
 
-        [SerializeField] private Material redMat;
-        [SerializeField] private Material greenMat;
-        [SerializeField] private Material blueMat;
-        [SerializeField] private Material blackMat;
-        [SerializeField] private Material whiteMat;
-        [SerializeField] private Material yellowMat;
-        
+
         private void Awake()
         {
             _collider = GetComponent<BoxCollider>();

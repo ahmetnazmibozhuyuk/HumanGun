@@ -24,9 +24,9 @@ namespace HumanGun.Tools
         }
         private void OnValidate()
         {
-            animator.Play("pose_0" + (poseIndex + 1).ToString());
-            animator.Update(Time.deltaTime);
-            dummyRenderer.material = StickMaterial();
+            //animator.Play("pose_0" + (poseIndex + 1).ToString());
+            //animator.Update(Time.deltaTime);
+            //dummyRenderer.material = StickMaterial();
         }
         private void DestroyMeshes()
         {

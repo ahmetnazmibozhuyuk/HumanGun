@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using ObjectPooling;
 using HumanGun.GunRelated;
-using System.Drawing;
-using UnityEditor.Experimental.GraphView;
 
 namespace HumanGun.Managers
 {
@@ -49,10 +44,11 @@ namespace HumanGun.Managers
             base.Awake();
             _uiManager = GetComponent<UIManager>();
             _levelManager= GetComponent<LevelMananger>();
-            GameStateHandler.ChangeState(GameState.GameAwaitingStart);
+
         }
         private void Start()
         {
+            GameStateHandler.ChangeState(GameState.GameAwaitingStart);
             StartLevel();
         }
 

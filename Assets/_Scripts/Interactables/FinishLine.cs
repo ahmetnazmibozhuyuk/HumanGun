@@ -1,21 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+using HumanGun.Managers;
 using UnityEngine;
 
 namespace HumanGun
 {
     public class FinishLine : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        private void OnTriggerEnter(Collider other)
         {
-        
-        }
+            if (!other.CompareTag("Player")) return;
 
-        // Update is called once per frame
-        void Update()
-        {
-        
+            GameManager.Instance.PassedFinishLine();
         }
     }
 }
