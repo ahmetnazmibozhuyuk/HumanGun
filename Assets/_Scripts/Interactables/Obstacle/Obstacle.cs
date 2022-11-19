@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
+using HumanGun.Managers;
 
 namespace HumanGun.Interactable
 {
@@ -25,11 +26,13 @@ namespace HumanGun.Interactable
             remainingHealthText.SetText(CurrentLives.ToString());
             if (CurrentLives <= 0)
             {
+                GameManager.Instance.CubeScatterParticle(transform.position, 1.5f);
                 Destroy(gameObject);
             }
             else
             {
                 transform.DOShakeScale(0.2f,0.5f,5);
+                GameManager.Instance.CubeScatterParticle(transform.position, 0.8f);
             }
         }
     }
