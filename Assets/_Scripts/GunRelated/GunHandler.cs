@@ -71,11 +71,20 @@ namespace HumanGun.GunRelated
         }
         private void OnEnable()
         {
+            GameStateHandler.OnGameAwaitingStartState += InitializeNewLevel;
             GameStateHandler.OnGameStartedState += SetInitialPose;
         }
         private void OnDisable()
         {
+            GameStateHandler.OnGameAwaitingStartState -= InitializeNewLevel;
             GameStateHandler.OnGameStartedState -= SetInitialPose;
+        }
+        private void InitializeNewLevel()
+        {
+            _attachedStickManTransform.Clear();
+            _stickManList.Clear();
+            _currentGunMode = GunMode.Idle;
+            AssignShootAction();
         }
         private void SetInitialPose()
         {
@@ -84,8 +93,6 @@ namespace HumanGun.GunRelated
         private void Update()
         {
             if(GameStateHandler.CurrentState != GameState.GameStarted) return;
-
-            AssignShootAction();
             ShootLoop();
         }
 
@@ -124,6 +131,7 @@ namespace HumanGun.GunRelated
             stickMan.RepositionStickMan(_currentStickMenConfiguration[_stickManList.Count].PoseIndex,
                 _currentStickMenConfiguration[_stickManList.Count].LocalTransform, _currentStickMenConfiguration[_stickManList.Count].ColorList);
             animator.SetTrigger(PoseNames[0]);
+            AssignShootAction();
         }
         private void HitDestructable(Collider other)
         {
@@ -154,6 +162,7 @@ namespace HumanGun.GunRelated
                 GameIsFinished();
                 break;
             }
+            AssignShootAction();
         }
         private void GameIsFinished()
         {
@@ -242,7 +251,12 @@ namespace HumanGun.GunRelated
         #region Shoot Methods
         private void AssignShootAction()
         {
-            if (_currentGunMode == GunMode.Idle) return;
+            if (_currentGunMode == GunMode.Idle)
+            {
+                ShootAction = null;
+                return;
+            }
+
 
             switch (_currentGunMode)
             {
@@ -264,7 +278,7 @@ namespace HumanGun.GunRelated
         {
             GameObject spawnedBullet = Instantiate(bulletProjectile, pistolInfo.ShootingTransform.position, Quaternion.identity);
             spawnedBullet.GetComponent<BulletProjectile>().ShootBullet(new Vector3(0, 0, 20),1);
-            for(int i = 2; i <= 4; i++)
+            for(int i = 1; i <= 4; i++)
             {
                 if (i < _attachedStickManTransform.Count)
                 {
