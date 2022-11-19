@@ -31,6 +31,7 @@ namespace HumanGun.Managers
         #endregion
 
         [SerializeField] private GameObject explosionObject;
+        [SerializeField] private GameObject cubeScatterGameObject;
 
         private WaitForSeconds _despawnDelay = new WaitForSeconds(1);
 
@@ -112,11 +113,15 @@ namespace HumanGun.Managers
         }
         public void SpawnExplosionParticle(Vector3 position, float sizeMultiplier)
         {
-            StartCoroutine(Co_SpawnParticle(position, sizeMultiplier));
+            StartCoroutine(Co_SpawnParticle(explosionObject,position, sizeMultiplier));
         }
-        private IEnumerator Co_SpawnParticle(Vector3 position, float sizeMultiplier)
+        public void CubeScatterParticle(Vector3 position, float sizeMultiplier)
         {
-            GameObject particleToSpawn = ObjectPool.Spawn(explosionObject, position, Quaternion.identity);
+            StartCoroutine(Co_SpawnParticle(cubeScatterGameObject,position, sizeMultiplier));
+        }
+        private IEnumerator Co_SpawnParticle(GameObject spawnObject,Vector3 position, float sizeMultiplier)
+        {
+            GameObject particleToSpawn = ObjectPool.Spawn(spawnObject, position, Quaternion.identity);
             particleToSpawn.transform.localScale = Vector3.one* sizeMultiplier;
             yield return _despawnDelay;
             ObjectPool.Despawn(particleToSpawn);
