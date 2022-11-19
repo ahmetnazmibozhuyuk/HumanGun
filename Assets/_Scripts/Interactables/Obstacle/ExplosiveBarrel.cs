@@ -17,6 +17,12 @@ namespace HumanGun
 
         [SerializeField] private LayerMask _layerMask;
 
+        private void Start()
+        {
+            CurrentLives = maxLivesAmount;
+            remainingHealthText.SetText(CurrentLives.ToString());
+        }
+
         public void HitObstacle(int hitAmount)
         {
             CurrentLives -= hitAmount;
