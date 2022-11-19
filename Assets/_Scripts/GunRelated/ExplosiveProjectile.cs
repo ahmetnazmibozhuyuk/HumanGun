@@ -1,4 +1,5 @@
 using HumanGun.Interactable;
+using HumanGun.Managers;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -65,7 +66,7 @@ namespace HumanGun.GunRelated
         }
         private void HitExplosion()
         {
-
+            GameManager.Instance.SpawnExplosionParticle(transform.position, 0.5f);
         }
 
     }

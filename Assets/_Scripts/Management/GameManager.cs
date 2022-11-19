@@ -1,5 +1,7 @@
 using UnityEngine;
 using HumanGun.GunRelated;
+using ObjectPooling;
+using System.Collections;
 
 namespace HumanGun.Managers
 {
@@ -27,6 +29,10 @@ namespace HumanGun.Managers
 
 
         #endregion
+
+        [SerializeField] private GameObject explosionObject;
+
+        private WaitForSeconds _despawnDelay = new WaitForSeconds(1);
 
         #region Color Related
         [SerializeField] private Material redMat;
@@ -103,6 +109,17 @@ namespace HumanGun.Managers
                 default:
                     return whiteMat;
             }
+        }
+        public void SpawnExplosionParticle(Vector3 position, float sizeMultiplier)
+        {
+            StartCoroutine(Co_SpawnParticle(position, sizeMultiplier));
+        }
+        private IEnumerator Co_SpawnParticle(Vector3 position, float sizeMultiplier)
+        {
+            GameObject particleToSpawn = ObjectPool.Spawn(explosionObject, position, Quaternion.identity);
+            particleToSpawn.transform.localScale = Vector3.one* sizeMultiplier;
+            yield return _despawnDelay;
+            ObjectPool.Despawn(particleToSpawn);
         }
     }
 }

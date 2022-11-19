@@ -1,5 +1,6 @@
 using DG.Tweening;
 using HumanGun.Interactable;
+using HumanGun.Managers;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -49,7 +50,7 @@ namespace HumanGun
         }
         private void HitExplosion()
         {
-
+            GameManager.Instance.SpawnExplosionParticle(transform.position, 1);
         }
     }
 }
