@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 namespace HumanGun.Interactable
@@ -10,18 +11,24 @@ namespace HumanGun.Interactable
         [SerializeField] private TextMeshProUGUI additionAmountText;
 
         [SerializeField] private Transform spawnTransform;
+
+        private Vector3 _finalPosition { get { return new Vector3(transform.position.x + Random.Range(-0.5f, 0.5f), 0.7f, transform.position.z + Random.Range(1f, 3f)); } }
+
+        private void Start()
+        {
+            additionAmountText.SetText("+"+amountToSpawn.ToString());
+        }
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
                 Destroy(GetComponent<Collider>());
-                for(int i = 0; i < amountToSpawn; i++)
+                for (int i = 0; i < amountToSpawn; i++)
                 {
-                    Instantiate(stickManPrefab, new Vector3(spawnTransform.position.x, spawnTransform.position.y, spawnTransform.position.z),Quaternion.identity);
-                    // @todo spawn pozisyonları ve animasyonunu düzelt
+                    Transform temp = Instantiate(stickManPrefab, spawnTransform.position, Quaternion.identity).transform;
+                    temp.DOJump(_finalPosition, 2, 1, 1);
                 }
             }
         }
-
     }
 }

@@ -26,8 +26,6 @@ namespace HumanGun.Managers
         public static int CurrentLevel { get { return PlayerPrefs.GetInt(CurrentLevelKey); } }
 
 
-
-
         #endregion
 
         #region Color Related
@@ -46,21 +44,30 @@ namespace HumanGun.Managers
             _levelManager= GetComponent<LevelMananger>();
 
         }
+        private void OnEnable()
+        {
+            GameStateHandler.OnGameAwaitingStartState += InitializeGame;
+        }
+        private void OnDisable()
+        {
+            GameStateHandler.OnGameAwaitingStartState -= InitializeGame;
+        }
         private void Start()
         {
             GameStateHandler.ChangeState(GameState.GameAwaitingStart);
             StartLevel();
         }
-
+        private void InitializeGame()
+        {
+            HasWon = false;
+        }
         public void AddMoney(float amountToAdd)
         {
             _uiManager.AddMoney(amountToAdd);
-
-            
         }
         public void StartLevel()
         {
-            HasWon = false;
+
 
             _levelManager.LoadCurrentLevel();
         }
