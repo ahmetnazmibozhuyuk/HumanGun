@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionDamage: 3
-  maxLivesAmount: 2
+  maxLivesAmount: 20
   remainingHealthText: {fileID: 619200550898442369}
   _layerMask:
     serializedVersion: 2
