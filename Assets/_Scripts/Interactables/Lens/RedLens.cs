@@ -19,5 +19,7 @@ namespace HumanGun.Interactable
             _isHit = true;
             return hitAmount;
         }
+
+
     }
 }
