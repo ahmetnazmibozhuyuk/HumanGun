@@ -11,8 +11,6 @@ namespace HumanGun.Control
         [SerializeField] private float maxForwardSpeed;
         [SerializeField] private float horizontalClampLimit;
 
-        [SerializeField] private float keyboardSpeed = 12;
-
         private float _hitDownPositionx;
         private float _offsetx;
 
